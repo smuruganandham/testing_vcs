@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW p_regions_2 AS SELECT p_regions_1.region_id AS region_id, p_regions_1.region_name AS region_name, p_regions_1.rocking AS rocking, case WHEN (rocking = 'rocking') THEN true ELSE false END AS awesome FROM p_regions_1;
+
+ALTER VIEW p_regions_2
+ LAYOUT (p_regions_1 = [20, 20, 200, 86]);
+

@@ -1,0 +1,85 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER CUSTOM ds_awss3
+    FOLDER = '/datasource'
+    DATASOURCENAME=ds_awss3
+    PARAMETERS (
+      'File system URI' = 's3a://\@denodotest',
+      'Path' = '/textfile/FL_insurance_sample.csv',
+      'Delete after reading' = false,
+      'Custom core-site.xml file' = ROUTE LOCAL 'LocalConnection' '${databases.admin.folder.datasource.views.custom.ds_awss3.Custom core-site.xml file.ROUTE.LOCAL.PATH}',
+      'Separator' = ',',
+      'Ignore spaces' = false,
+      'Header' = true,
+      'Kerberos enabled' = false
+    )
+    OUTPUTSCHEMA (
+        policyid = 'policyID' : 'java.lang.String' (sourcetypeid='12')  NOT SORTABLE NOT UPDATEABLE,
+        statecode = 'statecode' : 'java.lang.String' (sourcetypeid='12')  NOT SORTABLE NOT UPDATEABLE,
+        county = 'county' : 'java.lang.String' (sourcetypeid='12')  NOT SORTABLE NOT UPDATEABLE,
+        eq_site_limit = 'eq_site_limit' : 'java.lang.String' (sourcetypeid='12')  NOT SORTABLE NOT UPDATEABLE,
+        hu_site_limit = 'hu_site_limit' : 'java.lang.String' (sourcetypeid='12')  NOT SORTABLE NOT UPDATEABLE,
+        fl_site_limit = 'fl_site_limit' : 'java.lang.String' (sourcetypeid='12')  NOT SORTABLE NOT UPDATEABLE,
+        fr_site_limit = 'fr_site_limit' : 'java.lang.String' (sourcetypeid='12')  NOT SORTABLE NOT UPDATEABLE,
+        tiv_2011 = 'tiv_2011' : 'java.lang.String' (sourcetypeid='12')  NOT SORTABLE NOT UPDATEABLE,
+        tiv_2012 = 'tiv_2012' : 'java.lang.String' (sourcetypeid='12')  NOT SORTABLE NOT UPDATEABLE,
+        eq_site_deductible = 'eq_site_deductible' : 'java.lang.String' (sourcetypeid='12')  NOT SORTABLE NOT UPDATEABLE,
+        hu_site_deductible = 'hu_site_deductible' : 'java.lang.String' (sourcetypeid='12')  NOT SORTABLE NOT UPDATEABLE,
+        fl_site_deductible = 'fl_site_deductible' : 'java.lang.String' (sourcetypeid='12')  NOT SORTABLE NOT UPDATEABLE,
+        fr_site_deductible = 'fr_site_deductible' : 'java.lang.String' (sourcetypeid='12')  NOT SORTABLE NOT UPDATEABLE,
+        point_latitude = 'point_latitude' : 'java.lang.String' (sourcetypeid='12')  NOT SORTABLE NOT UPDATEABLE,
+        point_longitude = 'point_longitude' : 'java.lang.String' (sourcetypeid='12')  NOT SORTABLE NOT UPDATEABLE,
+        line = 'line' : 'java.lang.String' (sourcetypeid='12')  NOT SORTABLE NOT UPDATEABLE,
+        construction = 'construction' : 'java.lang.String' (sourcetypeid='12')  NOT SORTABLE NOT UPDATEABLE,
+        point_granularity = 'point_granularity' : 'java.lang.String' (sourcetypeid='12')  NOT SORTABLE NOT UPDATEABLE
+    );
+
+CREATE OR REPLACE TABLE ds_awss3 I18N au_cst (
+        policyid:text (sourcetypeid = '12'), 
+        statecode:text (sourcetypeid = '12'), 
+        county:text (sourcetypeid = '12'), 
+        eq_site_limit:text (sourcetypeid = '12'), 
+        hu_site_limit:text (sourcetypeid = '12'), 
+        fl_site_limit:text (sourcetypeid = '12'), 
+        fr_site_limit:text (sourcetypeid = '12'), 
+        tiv_2011:text (sourcetypeid = '12'), 
+        tiv_2012:text (sourcetypeid = '12'), 
+        eq_site_deductible:text (sourcetypeid = '12'), 
+        hu_site_deductible:text (sourcetypeid = '12'), 
+        fl_site_deductible:text (sourcetypeid = '12'), 
+        fr_site_deductible:text (sourcetypeid = '12'), 
+        point_latitude:text (sourcetypeid = '12'), 
+        point_longitude:text (sourcetypeid = '12'), 
+        line:text (sourcetypeid = '12'), 
+        construction:text (sourcetypeid = '12'), 
+        point_granularity:text (sourcetypeid = '12')
+    )
+    FOLDER = '/datasource'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD ds_awss3(
+        I18N au_cst
+        CONSTRAINTS (
+             ADD policyid NOS ZERO ()
+             ADD statecode NOS ZERO ()
+             ADD county NOS ZERO ()
+             ADD eq_site_limit NOS ZERO ()
+             ADD hu_site_limit NOS ZERO ()
+             ADD fl_site_limit NOS ZERO ()
+             ADD fr_site_limit NOS ZERO ()
+             ADD tiv_2011 NOS ZERO ()
+             ADD tiv_2012 NOS ZERO ()
+             ADD eq_site_deductible NOS ZERO ()
+             ADD hu_site_deductible NOS ZERO ()
+             ADD fl_site_deductible NOS ZERO ()
+             ADD fr_site_deductible NOS ZERO ()
+             ADD point_latitude NOS ZERO ()
+             ADD point_longitude NOS ZERO ()
+             ADD line NOS ZERO ()
+             ADD construction NOS ZERO ()
+             ADD point_granularity NOS ZERO ()
+        )
+        OUTPUTLIST (construction, county, eq_site_deductible, eq_site_limit, fl_site_deductible, fl_site_limit, fr_site_deductible, fr_site_limit, hu_site_deductible, hu_site_limit, line, point_granularity, point_latitude, point_longitude, policyid, statecode, tiv_2011, tiv_2012
+        )
+        WRAPPER (custom ds_awss3)
+    );
+
