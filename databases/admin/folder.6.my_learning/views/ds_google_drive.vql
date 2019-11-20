@@ -1,0 +1,50 @@
+﻿CREATE OR REPLACE WRAPPER JSON ds_google_drive
+    FOLDER = '/6.my_learning'
+    DATASOURCENAME=ds_google_drive
+    TUPLEROOT '/JSONFile'
+    OUTPUTSCHEMA (jsonfile = 'JSONFile' : REGISTER OF (
+        name = 'NAME' : 'java.lang.String' (OBL) (DEFAULTVALUE='excel') EXTERN,
+        kind = 'kind' : 'java.lang.String',
+        incompletesearch = 'incompleteSearch' : 'java.lang.String',
+        files = 'files' : ARRAY OF (
+            files = 'files' : REGISTER OF (
+                kind = 'kind' : 'java.lang.String',
+                id = 'id' : 'java.lang.String',
+                name = 'name' : 'java.lang.String',
+                mimetype = 'mimeType' : 'java.lang.String'
+            )
+        )
+    )
+    );
+
+CREATE OR REPLACE TYPE ds_google_drive_files_files AS REGISTER OF (kind:text, id:text, name:text, mimetype:text);
+
+CREATE OR REPLACE TYPE ds_google_drive_files AS ARRAY OF ds_google_drive_files_files;
+
+CREATE OR REPLACE TABLE ds_google_drive I18N us_pst (
+        name:text (extern), 
+        kind:text, 
+        incompletesearch:text, 
+        files:ds_google_drive_files
+    )
+    FOLDER = '/6.my_learning'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD ds_google_drive(
+        I18N us_pst
+        CONSTRAINTS (
+             ADD name (=) OBL ONE
+             ADD kind NOS ZERO ()
+             ADD incompletesearch NOS ZERO ()
+             ADD files NOS ZERO ()
+             ADD files NOS ZERO ()
+             ADD files.kind NOS ZERO ()
+             ADD files.id NOS ZERO ()
+             ADD files.name NOS ZERO ()
+             ADD files.mimetype NOS ZERO ()
+        )
+        OUTPUTLIST (files, incompletesearch, kind
+        )
+        WRAPPER (json ds_google_drive)
+    );
+

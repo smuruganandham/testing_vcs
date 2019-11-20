@@ -1,0 +1,20 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE DATASOURCE JSON ds_google_drive
+    FOLDER = '/6.my_learning'
+    ROUTE HTTP 'http.CommonsHttpClientConnection,120000' GET '${databases.admin.folder.6..my_learning.datasources.json.ds_google_drive.ROUTE.HTTP.URL}'
+    AUTHENTICATION OAUTH20 ( 
+      ACCESSTOKEN = '${databases.admin.folder.6..my_learning.datasources.json.ds_google_drive.ROUTE.HTTP.ACCESSTOKEN}' ${databases.admin.folder.6..my_learning.datasources.json.ds_google_drive.ROUTE.HTTP.ACCESSTOKEN.ENCRYPTED}
+      REQUESTSIGNINGMETHOD = ${databases.admin.folder.6..my_learning.datasources.json.ds_google_drive.ROUTE.HTTP.REQUESTSIGNINGMETHOD}
+      AUTHENTICATION_GRANT = ${databases.admin.folder.6..my_learning.datasources.json.ds_google_drive.ROUTE.AUTHENTICATION.GRANT}
+      TOKENENDPOINTURL = '${databases.admin.folder.6..my_learning.datasources.json.ds_google_drive.ROUTE.HTTP.TOKENENDPOINTURL}'
+      CLIENTIDENTIFIER = '${databases.admin.folder.6..my_learning.datasources.json.ds_google_drive.ROUTE.HTTP.CLIENTIDENTIFIER}'
+      CLIENTSECRET = '${databases.admin.folder.6..my_learning.datasources.json.ds_google_drive.ROUTE.HTTP.CLIENTSECRET}' ${databases.admin.folder.6..my_learning.datasources.json.ds_google_drive.ROUTE.HTTP.CLIENTSECRET.ENCRYPTED}
+      REFRESHTOKEN = '${databases.admin.folder.6..my_learning.datasources.json.ds_google_drive.ROUTE.HTTP.REFRESHTOKEN}' ${databases.admin.folder.6..my_learning.datasources.json.ds_google_drive.ROUTE.HTTP.REFRESHTOKEN.ENCRYPTED}
+      ACCESSTOKENEXPIRESIN = ${databases.admin.folder.6..my_learning.datasources.json.ds_google_drive.ROUTE.HTTP.ACCESSTOKENEXPIRESIN}
+      AUTHORIZATIONSERVERURL = '${databases.admin.folder.6..my_learning.datasources.json.ds_google_drive.ROUTE.HTTP.AUTHORIZATIONSERVERURL}'
+      REDIRECTIONENDPOINTURL = ${databases.admin.folder.6..my_learning.datasources.json.ds_google_drive.ROUTE.HTTP.REDIRECTIONENDPOINTURL}
+      SCOPES = ${databases.admin.folder.6..my_learning.datasources.json.ds_google_drive.ROUTE.HTTP.SCOPES}
+      SETSTATEPARAMETER = ${databases.admin.folder.6..my_learning.datasources.json.ds_google_drive.ROUTE.HTTP.SETSTATEPARAMETER}
+    )
+    PROXY OFF;
+

@@ -23,7 +23,7 @@ CREATE OR REPLACE DATASOURCE JDBC ds_oracle
     POOLPREPAREDSTATEMENTS = false
     MAXSLEEPINGPS = 4
     INITIALCAPACITYPS = 8
-    PROPERTIES ('remarksReporting'='false', 'includeSynonyms'='false')
+    PROPERTIES ('includeSynonyms'='false', 'remarksReporting'='false')
     DATA_LOAD_CONFIGURATION (
         BATCHINSERTSIZE = 200
     );

@@ -1,14 +1,16 @@
 ﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
 CREATE OR REPLACE DATASOURCE JDBC vdpcachedatasource
-    DRIVERCLASSNAME = 'net.sourceforge.jtds.jdbc.Driver'
+    DRIVERCLASSNAME = 'org.apache.derby.jdbc.ClientDriver'
     DATABASEURI = '${databases.admin.datasources.jdbc.vdpcachedatasource.DATABASEURI}'
-    USERNAME = '${databases.admin.datasources.jdbc.vdpcachedatasource.USERNAME}'
-    USERPASSWORD = '${databases.admin.datasources.jdbc.vdpcachedatasource.USERPASSWORD}' ${databases.admin.datasources.jdbc.vdpcachedatasource.USERPASSWORD.ENCRYPTED}
-    CLASSPATH = 'denodo-jtds-1.3.1'
-    DATABASENAME = 'sqlserver'
-    DATABASEVERSION = '2016'
+    WITH PASS-THROUGH SESSION CREDENTIALS ( 
+        USERNAME = '${databases.admin.datasources.jdbc.vdpcachedatasource.USERNAME}'
+        USERPASSWORD = '${databases.admin.datasources.jdbc.vdpcachedatasource.USERPASSWORD}' ${databases.admin.datasources.jdbc.vdpcachedatasource.USERPASSWORD.ENCRYPTED}
+    ) 
+    CLASSPATH = 'derby-10'
+    DATABASENAME = 'derby'
+    DATABASEVERSION = '10'
     FETCHSIZE = 1000
-    VALIDATIONQUERY = 'Select 1'
+    VALIDATIONQUERY = 'values 1'
     INITIALSIZE = 4
     MAXIDLE = -1
     MINIDLE = 0
@@ -24,6 +26,6 @@ CREATE OR REPLACE DATASOURCE JDBC vdpcachedatasource
     MAXSLEEPINGPS = 4
     INITIALCAPACITYPS = 8
     DATA_LOAD_CONFIGURATION (
-        BATCHINSERTSIZE = 1000
+        BATCHINSERTSIZE = 200
     );
 

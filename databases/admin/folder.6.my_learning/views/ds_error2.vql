@@ -1,0 +1,23 @@
+﻿CREATE OR REPLACE WRAPPER DF ds_error2
+    FOLDER = '/6.my_learning'
+    DATASOURCENAME=ds_error2
+    OUTPUTSCHEMA (
+        column0 = 'Column0' (OPT)
+    );
+
+CREATE OR REPLACE TABLE ds_error2 I18N us_pst (
+        column0:text
+    )
+    FOLDER = '/6.my_learning'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD ds_error2(
+        I18N us_pst
+        CONSTRAINTS (
+             ADD column0 (=,in) OPT ANY
+        )
+        OUTPUTLIST (column0
+        )
+        WRAPPER (df ds_error2)
+    );
+

@@ -1,0 +1,8 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE DATASOURCE DF ds_error2
+    FOLDER = '/6.my_learning'
+    ROUTE LOCAL 'LocalConnection' '${databases.admin.folder.6..my_learning.datasources.df.ds_error2.ROUTE.LOCAL.PATH}'
+    COLUMNDELIMITER = ','
+    ENDOFLINEDELIMITER = '\n'
+    HEADER = FALSE;
+

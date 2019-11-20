@@ -1,3 +1,12 @@
 ﻿ALTER DATABASE admin
   CHARSET DEFAULT;
 
+ALTER DATABASE admin
+  AUTHENTICATION LDAP admin.ds_active_directory_copy
+    USERBASE = 'CN=Users,DC=denodo,DC=loc'
+    USERATTRIBUTENAME = 'sAMAccountName'
+    USERSEARCH = '(&(objectClass=person))'
+    ROLEBASE = 'OU=groups,DC=denodo,DC=loc'
+    ROLEATTRIBUTENAME = 'cn'
+    ROLESEARCH = '(member=@{{USERDN}})';
+
