@@ -1,5 +1,0 @@
-﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
-CREATE OR REPLACE DATASOURCE XML ds_coresite
-    FOLDER = '/6.my_learning'
-    ROUTE LOCAL 'LocalConnection' '${databases.admin.folder.6..my_learning.datasources.xml.ds_coresite.ROUTE.LOCAL.PATH}';
-
