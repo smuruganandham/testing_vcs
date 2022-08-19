@@ -1,5 +1,0 @@
-﻿CREATE OR REPLACE DATASOURCE CUSTOM ds_awss3
-    FOLDER = '/datasource'
-    CLASSNAME='com.denodo.connect.hadoop.hdfs.wrapper.HDFSDelimitedTextFileWrapper'
-    JARS 'denodo-hdfs-customwrapper-7.0';
-
